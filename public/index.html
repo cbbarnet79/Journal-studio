@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A focused writing workspace for student journals.">
+  <title>Journal Studio</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <header>
+    <a class="brand" href="./"><span aria-hidden="true">✎</span> Journal Studio</a>
+    <div id="account" hidden><span id="identity"></span><button id="sign-out" class="quiet">Sign out</button></div>
+  </header>
+  <main>
+    <section id="welcome" class="welcome">
+      <div class="intro">
+        <h1>Your writing session</h1>
+        <p>Sign in with Gmail to write your journal and share it with your professor.</p>
+        <button id="sign-in" disabled>Continue with Google</button>
+      </div>
+      <aside class="card">
+        <h2>During your session</h2>
+        <p>Journal Studio records how long you write, your word count and pace, and when the page loses focus or becomes hidden. Paste and drop attempts are blocked and counted.</p>
+        <p>Your professor receives your writing and a summary of these events. The browser only observes activity it can detect on this page.</p>
+      </aside>
+    </section>
+    <section id="workspace" hidden>
+      <h1>Your writing session</h1>
+      <div class="layout">
+        <section class="card paper" aria-labelledby="editor-label">
+          <div class="paper-head"><h2 id="editor-label">Journal entry</h2><button id="start">Start writing</button></div>
+          <label class="sr-only" for="editor">Journal entry</label>
+          <textarea id="editor" readonly maxlength="40000" spellcheck="false" autocorrect="off" autocomplete="off" data-gramm="false" data-gramm_editor="false" placeholder="Start your session when you’re ready to write."></textarea>
+        </section>
+        <aside class="card sidebar">
+          <h2>Session summary</h2>
+          <dl>
+            <div><dt>Words</dt><dd id="words">0</dd></div>
+            <div><dt>Elapsed time</dt><dd id="elapsed">0:00</dd></div>
+            <div><dt>Words per minute</dt><dd id="pace">0</dd></div>
+            <div><dt>Focus interruptions</dt><dd id="interruptions">0</dd></div>
+            <div><dt>Time away</dt><dd id="away">0:00</dd></div>
+            <div><dt>Blocked paste/drop attempts</dt><dd id="blocked">0</dd></div>
+          </dl>
+          <form id="submission">
+            <label for="professor">Professor’s email</label>
+            <input id="professor" type="email" autocomplete="off" required maxlength="254" placeholder="professor@example.edu">
+            <button id="finish" disabled>Finish and email</button>
+          </form>
+          <p class="note" id="submission-note">Finishing saves a copy and emails your entry and session summary.</p>
+          <button id="new-session" class="quiet" hidden>Start a new entry</button>
+        </aside>
+      </div>
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>
