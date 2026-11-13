@@ -1,3 +1,4 @@
+import config from "./firebase-config.js";
 import { countWords, summarize, updateFocus } from "./session.mjs";
 
 const byId = (id) => document.getElementById(id);
@@ -128,10 +129,6 @@ byId("new-session").addEventListener("click", () => {
 });
 
 async function connectFirebase() {
-  const response = await fetch("/__/firebase/init.json");
-  if (!response.ok) throw new Error("Firebase Hosting configuration unavailable.");
-  const config = await response.json();
-  if (!config.projectId || !config.authDomain || !config.apiKey) throw new Error("Firebase configuration unavailable.");
   const base = "https://www.gstatic.com/firebasejs/12.7.0/";
   const [{ initializeApp }, authSdk, functionsSdk] = await Promise.all([
     import(base + "firebase-app.js"),
@@ -225,5 +222,5 @@ async function connectFirebase() {
 }
 
 connectFirebase().catch(() => {
-  status.textContent = "Google sign-in is unavailable here. Open the app from its configured Firebase Hosting site.";
+  status.textContent = "Google sign-in could not load. Check your connection and reload the page.";
 });
